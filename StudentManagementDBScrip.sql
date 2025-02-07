@@ -1,93 +1,6 @@
-USE [master]
-GO
-/****** Object:  Database [StudentManagementDB]    Script Date: 06-Feb-25 3:58:32 PM ******/
-CREATE DATABASE [StudentManagementDB]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'StudentManagementDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\StudentManagementDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'StudentManagementDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\StudentManagementDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
-GO
-ALTER DATABASE [StudentManagementDB] SET COMPATIBILITY_LEVEL = 130
-GO
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [StudentManagementDB].[dbo].[sp_fulltext_database] @action = 'enable'
-end
-GO
-ALTER DATABASE [StudentManagementDB] SET ANSI_NULL_DEFAULT OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET ANSI_NULLS OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET ANSI_PADDING OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET ANSI_WARNINGS OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET ARITHABORT OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET AUTO_CLOSE OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET AUTO_SHRINK OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET AUTO_UPDATE_STATISTICS ON 
-GO
-ALTER DATABASE [StudentManagementDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET CURSOR_DEFAULT  GLOBAL 
-GO
-ALTER DATABASE [StudentManagementDB] SET CONCAT_NULL_YIELDS_NULL OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET NUMERIC_ROUNDABORT OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET QUOTED_IDENTIFIER OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET RECURSIVE_TRIGGERS OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET  DISABLE_BROKER 
-GO
-ALTER DATABASE [StudentManagementDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET TRUSTWORTHY OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET PARAMETERIZATION SIMPLE 
-GO
-ALTER DATABASE [StudentManagementDB] SET READ_COMMITTED_SNAPSHOT OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET HONOR_BROKER_PRIORITY OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET RECOVERY SIMPLE 
-GO
-ALTER DATABASE [StudentManagementDB] SET  MULTI_USER 
-GO
-ALTER DATABASE [StudentManagementDB] SET PAGE_VERIFY CHECKSUM  
-GO
-ALTER DATABASE [StudentManagementDB] SET DB_CHAINING OFF 
-GO
-ALTER DATABASE [StudentManagementDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
-GO
-ALTER DATABASE [StudentManagementDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
-GO
-ALTER DATABASE [StudentManagementDB] SET DELAYED_DURABILITY = DISABLED 
-GO
-ALTER DATABASE [StudentManagementDB] SET QUERY_STORE = OFF
-GO
 USE [StudentManagementDB]
 GO
-ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
-GO
-ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
-GO
-ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
-GO
-ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
-GO
-USE [StudentManagementDB]
-GO
-/****** Object:  Table [dbo].[MstNationalities]    Script Date: 06-Feb-25 3:58:32 PM ******/
+/****** Object:  Table [dbo].[MstNationalities]    Script Date: 07-Feb-25 8:08:01 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -100,14 +13,10 @@ CREATE TABLE [dbo].[MstNationalities](
  CONSTRAINT [PK_MstNationalities] PRIMARY KEY CLUSTERED 
 (
 	[NationalityAID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
- CONSTRAINT [UQ__MstNatio__2062829385D913FE] UNIQUE NONCLUSTERED 
-(
-	[Nationality] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MstStudents]    Script Date: 06-Feb-25 3:58:33 PM ******/
+/****** Object:  Table [dbo].[MstStudents]    Script Date: 07-Feb-25 8:08:01 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -126,7 +35,7 @@ CREATE TABLE [dbo].[MstStudents](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[ViewStudents]    Script Date: 06-Feb-25 3:58:33 PM ******/
+/****** Object:  View [dbo].[ViewStudents]    Script Date: 07-Feb-25 8:08:01 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -138,7 +47,7 @@ FROM    MstStudents AS Stud LEFT OUTER JOIN
         MstNationalities AS Nat ON Stud.NationalityID = Nat.NationalityAID
 WHERE   ISNULL(Stud.IsDeleted,0)=0
 GO
-/****** Object:  Table [dbo].[MstRelationship]    Script Date: 06-Feb-25 3:58:33 PM ******/
+/****** Object:  Table [dbo].[MstRelationship]    Script Date: 07-Feb-25 8:08:01 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -151,14 +60,10 @@ CREATE TABLE [dbo].[MstRelationship](
  CONSTRAINT [PK_MstRelationships] PRIMARY KEY CLUSTERED 
 (
 	[RelationAID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Relation] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FamilyMember]    Script Date: 06-Feb-25 3:58:33 PM ******/
+/****** Object:  Table [dbo].[FamilyMember]    Script Date: 07-Feb-25 8:08:01 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -179,7 +84,7 @@ CREATE TABLE [dbo].[FamilyMember](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[ViewStudentRelatives]    Script Date: 06-Feb-25 3:58:33 PM ******/
+/****** Object:  View [dbo].[ViewStudentRelatives]    Script Date: 07-Feb-25 8:08:01 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -201,6 +106,70 @@ FROM          FamilyMember AS Fam  LEFT OUTER JOIN ViewStudents AS Stud
 WHERE        (ISNULL(Fam.IsDeleted, 0) = 0)
         
 GO
+SET IDENTITY_INSERT [dbo].[FamilyMember] ON 
+GO
+INSERT [dbo].[FamilyMember] ([MemberAID], [MemberFirstName], [MemberLastName], [DateOfBirth], [RelationshipID], [NationalityID], [StudentID], [IsDeleted], [EntDate]) VALUES (1, N'asd', N'rwerew', CAST(N'2025-01-31T07:41:54.503' AS DateTime), 2, 2, 1, 0, CAST(N'2025-01-31T09:56:53.710' AS DateTime))
+GO
+INSERT [dbo].[FamilyMember] ([MemberAID], [MemberFirstName], [MemberLastName], [DateOfBirth], [RelationshipID], [NationalityID], [StudentID], [IsDeleted], [EntDate]) VALUES (2, N'riyas', N'palakkat', CAST(N'2025-02-03T05:40:23.593' AS DateTime), 1, NULL, 1, 0, CAST(N'2025-02-03T09:36:12.570' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[FamilyMember] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MstNationalities] ON 
+GO
+INSERT [dbo].[MstNationalities] ([NationalityAID], [Nationality], [OrderIndex], [IsActive]) VALUES (1, N'United Arab Emirates', 1, 1)
+GO
+INSERT [dbo].[MstNationalities] ([NationalityAID], [Nationality], [OrderIndex], [IsActive]) VALUES (2, N'Bahrain', 2, 1)
+GO
+INSERT [dbo].[MstNationalities] ([NationalityAID], [Nationality], [OrderIndex], [IsActive]) VALUES (3, N'Kuwait', 3, 1)
+GO
+INSERT [dbo].[MstNationalities] ([NationalityAID], [Nationality], [OrderIndex], [IsActive]) VALUES (4, N'Oman', 4, 1)
+GO
+INSERT [dbo].[MstNationalities] ([NationalityAID], [Nationality], [OrderIndex], [IsActive]) VALUES (5, N'India', 5, 1)
+GO
+INSERT [dbo].[MstNationalities] ([NationalityAID], [Nationality], [OrderIndex], [IsActive]) VALUES (6, N'China', 6, 1)
+GO
+SET IDENTITY_INSERT [dbo].[MstNationalities] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MstRelationship] ON 
+GO
+INSERT [dbo].[MstRelationship] ([RelationAID], [Relation], [OrderIndex], [IsActive]) VALUES (1, N'Parent', 1, 1)
+GO
+INSERT [dbo].[MstRelationship] ([RelationAID], [Relation], [OrderIndex], [IsActive]) VALUES (2, N'Sibling', 2, 1)
+GO
+INSERT [dbo].[MstRelationship] ([RelationAID], [Relation], [OrderIndex], [IsActive]) VALUES (3, N'Spouse', 3, 1)
+GO
+SET IDENTITY_INSERT [dbo].[MstRelationship] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MstStudents] ON 
+GO
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (1, N'shamna', N'apprmb', CAST(N'2001-01-31T00:00:00.000' AS DateTime), 3, 0, CAST(N'2025-01-31T09:54:23.523' AS DateTime))
+GO
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (2, N'asd', N'tester', CAST(N'2025-01-31T00:00:00.000' AS DateTime), NULL, 0, CAST(N'2025-01-31T11:46:00.533' AS DateTime))
+GO
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (3, N'john ss', N'testtttt', CAST(N'2025-02-03T00:00:00.000' AS DateTime), 4, 0, CAST(N'2025-02-03T09:31:39.573' AS DateTime))
+GO
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (4, N'ram', N'kallettupalam', CAST(N'2025-02-03T00:00:00.000' AS DateTime), 0, 0, CAST(N'2025-02-03T11:51:35.837' AS DateTime))
+GO
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (5, N'tester', N'nkm', CAST(N'1990-12-22T00:00:00.000' AS DateTime), 3, 0, CAST(N'2025-02-05T15:36:53.443' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[MstStudents] OFF
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__MstNatio__2062829385D913FE]    Script Date: 07-Feb-25 8:08:01 AM ******/
+ALTER TABLE [dbo].[MstNationalities] ADD  CONSTRAINT [UQ__MstNatio__2062829385D913FE] UNIQUE NONCLUSTERED 
+(
+	[Nationality] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__MstRelat__92ED18E14EE3452A]    Script Date: 07-Feb-25 8:08:01 AM ******/
+ALTER TABLE [dbo].[MstRelationship] ADD UNIQUE NONCLUSTERED 
+(
+	[Relation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
 ALTER TABLE [dbo].[FamilyMember] ADD  CONSTRAINT [DF_MstFamilyMembers_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
 GO
 ALTER TABLE [dbo].[FamilyMember] ADD  CONSTRAINT [DF_MstFamilyMembers_EntDate]  DEFAULT (getdate()) FOR [EntDate]
@@ -221,8 +190,4 @@ ALTER TABLE [dbo].[FamilyMember]  WITH CHECK ADD  CONSTRAINT [FK_MstFamilyMember
 REFERENCES [dbo].[MstRelationship] ([RelationAID])
 GO
 ALTER TABLE [dbo].[FamilyMember] CHECK CONSTRAINT [FK_MstFamilyMembers_MstRelationships]
-GO
-USE [master]
-GO
-ALTER DATABASE [StudentManagementDB] SET  READ_WRITE 
 GO
