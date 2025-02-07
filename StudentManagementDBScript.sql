@@ -1,6 +1,6 @@
 USE [StudentManagementDB]
 GO
-/****** Object:  Table [dbo].[MstNationalities]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  Table [dbo].[MstNationalities]    Script Date: 07-Feb-25 11:01:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -16,7 +16,7 @@ CREATE TABLE [dbo].[MstNationalities](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MstStudents]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  Table [dbo].[MstStudents]    Script Date: 07-Feb-25 11:01:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,7 +35,7 @@ CREATE TABLE [dbo].[MstStudents](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[ViewStudents]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  View [dbo].[ViewStudents]    Script Date: 07-Feb-25 11:01:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -47,7 +47,7 @@ FROM    MstStudents AS Stud LEFT OUTER JOIN
         MstNationalities AS Nat ON Stud.NationalityID = Nat.NationalityAID
 WHERE   ISNULL(Stud.IsDeleted,0)=0
 GO
-/****** Object:  Table [dbo].[MstRelationship]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  Table [dbo].[MstRelationship]    Script Date: 07-Feb-25 11:01:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -63,7 +63,7 @@ CREATE TABLE [dbo].[MstRelationship](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FamilyMember]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  Table [dbo].[FamilyMember]    Script Date: 07-Feb-25 11:01:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -84,7 +84,7 @@ CREATE TABLE [dbo].[FamilyMember](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[ViewStudentRelatives]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  View [dbo].[ViewStudentRelatives]    Script Date: 07-Feb-25 11:01:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -108,9 +108,9 @@ WHERE        (ISNULL(Fam.IsDeleted, 0) = 0)
 GO
 SET IDENTITY_INSERT [dbo].[FamilyMember] ON 
 GO
-INSERT [dbo].[FamilyMember] ([MemberAID], [MemberFirstName], [MemberLastName], [DateOfBirth], [RelationshipID], [NationalityID], [StudentID], [IsDeleted], [EntDate]) VALUES (1, N'asd', N'rwerew', CAST(N'2025-01-31T07:41:54.503' AS DateTime), 2, 2, 1, 0, CAST(N'2025-01-31T09:56:53.710' AS DateTime))
+INSERT [dbo].[FamilyMember] ([MemberAID], [MemberFirstName], [MemberLastName], [DateOfBirth], [RelationshipID], [NationalityID], [StudentID], [IsDeleted], [EntDate]) VALUES (1, N'muhammed', N'malappuram', CAST(N'2025-01-31T07:41:54.503' AS DateTime), 2, 2, 1, 0, CAST(N'2025-01-31T09:56:53.710' AS DateTime))
 GO
-INSERT [dbo].[FamilyMember] ([MemberAID], [MemberFirstName], [MemberLastName], [DateOfBirth], [RelationshipID], [NationalityID], [StudentID], [IsDeleted], [EntDate]) VALUES (2, N'riyas', N'palakkat', CAST(N'2025-02-03T05:40:23.593' AS DateTime), 1, NULL, 1, 0, CAST(N'2025-02-03T09:36:12.570' AS DateTime))
+INSERT [dbo].[FamilyMember] ([MemberAID], [MemberFirstName], [MemberLastName], [DateOfBirth], [RelationshipID], [NationalityID], [StudentID], [IsDeleted], [EntDate]) VALUES (2, N'riyas', N'palakkat', CAST(N'2025-02-03T05:40:23.593' AS DateTime), 1, 1, 1, 0, CAST(N'2025-02-03T09:36:12.570' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[FamilyMember] OFF
 GO
@@ -142,21 +142,23 @@ SET IDENTITY_INSERT [dbo].[MstRelationship] OFF
 GO
 SET IDENTITY_INSERT [dbo].[MstStudents] ON 
 GO
-INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (1, N'shamna', N'apprmb', CAST(N'2001-01-31T00:00:00.000' AS DateTime), 3, 0, CAST(N'2025-01-31T09:54:23.523' AS DateTime))
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (1, N'shamna', N'akaparam', CAST(N'2001-01-31T00:00:00.000' AS DateTime), 5, 0, CAST(N'2025-01-31T09:54:23.523' AS DateTime))
 GO
-INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (2, N'asd', N'tester', CAST(N'2025-01-31T00:00:00.000' AS DateTime), NULL, 0, CAST(N'2025-01-31T11:46:00.533' AS DateTime))
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (2, N'sayed', N'kallet', CAST(N'2025-01-31T00:00:00.000' AS DateTime), 3, 0, CAST(N'2025-01-31T11:46:00.533' AS DateTime))
 GO
-INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (3, N'john ss', N'testtttt', CAST(N'2025-02-03T00:00:00.000' AS DateTime), 4, 0, CAST(N'2025-02-03T09:31:39.573' AS DateTime))
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (3, N'shafi', N'malappuram', CAST(N'2025-02-03T00:00:00.000' AS DateTime), 4, 0, CAST(N'2025-02-03T09:31:39.573' AS DateTime))
 GO
-INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (4, N'ram', N'kallettupalam', CAST(N'2025-02-03T00:00:00.000' AS DateTime), 0, 0, CAST(N'2025-02-03T11:51:35.837' AS DateTime))
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (4, N'riyas', N'palakkat', CAST(N'2025-02-03T00:00:00.000' AS DateTime), 5, 0, CAST(N'2025-02-03T11:51:35.837' AS DateTime))
 GO
-INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (5, N'tester', N'nkm', CAST(N'1990-12-22T00:00:00.000' AS DateTime), 3, 0, CAST(N'2025-02-05T15:36:53.443' AS DateTime))
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (5, N'tester', N'test address', CAST(N'1990-12-22T00:00:00.000' AS DateTime), 3, 0, CAST(N'2025-02-05T15:36:53.443' AS DateTime))
+GO
+INSERT [dbo].[MstStudents] ([StudentAID], [FirstName], [LastName], [DOB], [NationalityID], [IsDeleted], [EntDate]) VALUES (6, N'razi', N'manjeri malappuram', CAST(N'2012-02-22T00:00:00.000' AS DateTime), 3, 0, CAST(N'2025-02-07T10:43:14.993' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[MstStudents] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__MstNatio__2062829385D913FE]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  Index [UQ__MstNatio__2062829385D913FE]    Script Date: 07-Feb-25 11:01:54 AM ******/
 ALTER TABLE [dbo].[MstNationalities] ADD  CONSTRAINT [UQ__MstNatio__2062829385D913FE] UNIQUE NONCLUSTERED 
 (
 	[Nationality] ASC
@@ -164,7 +166,7 @@ ALTER TABLE [dbo].[MstNationalities] ADD  CONSTRAINT [UQ__MstNatio__2062829385D9
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__MstRelat__92ED18E14EE3452A]    Script Date: 07-Feb-25 8:08:01 AM ******/
+/****** Object:  Index [UQ__MstRelat__92ED18E14EE3452A]    Script Date: 07-Feb-25 11:01:54 AM ******/
 ALTER TABLE [dbo].[MstRelationship] ADD UNIQUE NONCLUSTERED 
 (
 	[Relation] ASC
